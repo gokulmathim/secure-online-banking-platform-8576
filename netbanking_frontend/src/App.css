@@ -1,12 +1,17 @@
 /* CSS Variables for Theme Management */
 :root {
   /* Light theme colors */
-  --bg-primary: #ffffff;
+  --primary: #1976d2;
+  --secondary: #1565c0;
+  --accent: #43a047;
+
+  --bg-primary: #fff;
   --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
+  --bg-nav: #ffffff;
+  --text-primary: #252933;
+  --text-secondary: #62708a;
   --border-color: #e9ecef;
-  --button-bg: #007bff;
+  --button-bg: var(--primary);
   --button-text: #ffffff;
 }
 
@@ -14,19 +19,323 @@
   /* Dark theme colors */
   --bg-primary: #1a1a1a;
   --bg-secondary: #282c34;
+  --bg-nav: #1a1a1a;
   --text-primary: #ffffff;
-  --text-secondary: #61dafb;
+  --text-secondary: #b0bfd9;
   --border-color: #404040;
   --button-bg: #0056b3;
   --button-text: #ffffff;
 }
 
+/* Overall Layout */
 .App {
-  text-align: center;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: 'Inter', system-ui, Arial, sans-serif;
+}
+
+/* Layout for authenticated dashboard */
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.netbank-nav {
+  min-width: 208px;
+  background: var(--bg-nav);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.nav-logo {
+  font-weight: bold;
+  font-size: 1.4rem;
+  padding: 1.6rem 1.25rem 0.9rem 1.25rem;
+  color: var(--primary);
+  letter-spacing: 1px;
+}
+
+.netbank-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0 0;
+}
+.netbank-nav li {
+  margin: 0;
+  padding: 0;
+}
+.netbank-nav li.selected,
+.netbank-nav li button:focus-visible {
+  background: rgba(25, 118, 210, 0.08);
+}
+.netbank-nav li button {
+  user-select: none;
+  display: flex;
+  align-items: center;
+  border: 0;
+  outline: none;
+  background: none;
+  color: var(--text-primary);
+  font: inherit;
+  width: 100%;
+  padding: 0.95rem 1rem 0.95rem 1.8rem;
+  font-size: 1.04rem;
+  gap: 1rem;
+  cursor: pointer;
+  transition: background 0.13s;
+}
+.netbank-nav li button .icon {
+  font-size: 1.18rem;
+  min-width: 24px;
+}
+
+/* Main dashboard content */
+.main-content {
+  flex: 1;
+  min-width: 0;
+  background: var(--bg-secondary);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* TopBar */
+.netbank-topbar {
+  background: #fff;
+  min-height: 58px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.3rem;
+  font-size: 1.03rem;
+}
+.topbar-quicklinks .quick-btn {
+  margin-right: 1.1rem;
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: 0;
+  font-size: 1.01rem;
+  padding: 0.5rem 1.06rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: filter .15s;
+}
+.topbar-quicklinks .quick-btn:hover {
+  filter: brightness(0.95);
+}
+.topbar-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.95rem;
+}
+.topbar-profile .user-greeting {
+  color: var(--secondary);
+}
+.topbar-profile .logout-btn {
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* Shared Feature block */
+.section-block {
+  background: #fff;
+  border-radius: 9px;
+  box-shadow: 0 1.25px 7px rgba(25,117,210,0.03);
+  margin: 2.1rem auto 1rem auto;
+  max-width: 545px;
+  width: 100%;
+  padding: 2.1rem 2.5rem 2.1rem 2.5rem;
+  text-align: left;
+}
+.section-block h2 {
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 1.1rem;
+  font-size: 1.49rem;
+}
+.account-tile {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.35rem 2.3rem;
+  margin: 0.9rem 0;
+  background: var(--bg-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.account-title { font-weight: 500; color: var(--secondary);}
+.account-number { color: var(--text-secondary); font-size: 1.12em;}
+.account-balance { font-weight: 700; color: var(--accent);font-size: 1.19em;}
+
+.accounts-list {
+  display: flex; flex-direction: column; gap: 1.2rem;
+}
+.transactions-table {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+  margin-top: 0.9rem;
+}
+.transactions-table thead th {
+  color: var(--primary);
+  font-weight: 500;
+  font-size: 1.05em;
+  border-bottom: 1.5px solid var(--border-color);
+  padding: 0.65em 0.3em;
+}
+.transactions-table td {
+  padding: 0.82em 0.3em;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+  font-size: 1.01em;
+}
+
+.notif-list {
+  list-style: none; padding:0; margin: 0.8rem 0 0 0;
+}
+.notif {
+  padding: 0.68em 1.1em; margin-bottom: .6em;
+  border-radius: 6px;
+  background: var(--bg-secondary);
+  display: flex; justify-content: space-between;
+  align-items: center;
+  font-size: 1.06em;
+}
+.notif-info { background: #e4f1fa;}
+.notif-success { background: #e6fae4;}
+.notif-warning { background: #fff6e1;}
+.notif-msg { font-weight: 500;}
+.notif-date { color: var(--text-secondary); font-size: 0.98em; margin-left: 1.4em;}
+
+/* Auth forms */
+.App-auth {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  background: var(--bg-secondary);
+}
+.auth-container {
+  min-width: 320px;
+  max-width: 390px;
+  margin: 2.5rem auto 0 auto;
+}
+.auth-form, .profile-form, .payment-form, .transfer-form {
+  display: flex;
+  flex-direction: column; gap: 1.1em;
+  background: #fff;
+  border-radius: 8px;
+  padding: 2em 2.3em 1.4em;
+  box-shadow: 0 2px 5px rgba(25,117,210,0.07);
+  border:1px solid var(--border-color);
+}
+.auth-form h2 { color: var(--primary);}
+.auth-error { color:crimson; font-size:0.94em; margin-top:0.44em;}
+
+/* Buttons & links */
+.btn, .btn-link {
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  padding: 0.57em 1.45em;
+  font-size: 1.02em;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 1.1em;
+  font-family: inherit;
+  transition: filter 0.14s;
+}
+.btn:hover, .btn-link:hover { filter: brightness(0.96);}
+.btn-link {
+  background: none;
+  color: var(--primary);
+  text-decoration: underline;
+  padding: 0 0.3em;
+  margin: 0 0.4em;
+}
+
+/* Inputs and labels */
+input, select, textarea {
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 0.71em 1.1em;
+  font-size:1em;
+  transition: border .18s;
+  margin-bottom: 0.2em;
+  background: #fdfdfd;
+  outline: none;
+  color: var(--text-primary);
+}
+input:focus, select:focus, textarea:focus { border: 1.5px solid var(--primary);}
+label { font-weight: 500; color: var(--text-secondary); margin-top:0.45em;}
+
+/* Theme toggle button */
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+.theme-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  opacity: 0.9;
+}
+.theme-toggle:active {
+  transform: translateY(0);
+}
+
+/* Responsive design for mobile */
+@media (max-width: 1100px) {
+  .section-block { max-width: 96vw; padding: 1.5rem;}
+}
+@media (max-width: 768px) {
+  .dashboard-layout {
+    flex-direction: column;
+  }
+  .netbank-nav {
+    min-width: 100vw;
+    flex-direction: row;
+    border: none !important;
+    border-bottom: 1.5px solid var(--border-color);
+    overflow-x: auto;
+    background: var(--bg-nav);
+  }
+  .netbank-nav ul {
+    display: flex; flex-direction: row; gap: 0.1rem;
+    margin: 0;
+  }
+  .netbank-nav li button {
+    padding: 0.91rem 0.9rem;
+    font-size: 0.96rem;
+    border-radius: 0;
+    min-width: 97px;
+  }
+  .main-content { padding: 0;}
+  .section-block {padding:1.5rem;}
+  .theme-toggle {
+    top: 10px;
+    right: 10px;
+    padding: 8px 16px;
+    font-size: 12px;
+  }
 }
 
 .App-logo {
